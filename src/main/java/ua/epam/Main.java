@@ -12,20 +12,21 @@ public class Main {
             int number;
             int count = 0;
 
-            game.gameSart();
+            game.gameStart();
 
             while(true) {
                 count++;
                 System.out.println("enter number from " + game.getLow() + " to " + game.getHigh() + ":");
 
                 try {
-                    number = scan.nextInt();
+               //     number = scan.nextInt();
+                    number = Integer.parseInt(scan.nextLine());
 
-                    if (number > game.getHigh()) {
+                    if (game.checkBorders(number) == 1) {
                         System.out.println("You exceed higher border ");
                         continue;
                     }
-                    else if (number < game.getLow()) {
+                    else if (game.checkBorders(number) == -1) {
                         System.out.println("You exceed lower border ");
                         continue;
                     }
@@ -43,10 +44,11 @@ public class Main {
                             System.out.println("Your number is higher than random");
                         }
                     }
-                } catch (InputMismatchException e) {
+                } catch (Exception e) {
                     e.getMessage();
                     System.out.println("Wrong input");
-                    break;
+                   continue;
+                 //   main(args);
                 }
             }
         }

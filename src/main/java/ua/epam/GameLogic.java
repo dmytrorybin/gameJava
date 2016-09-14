@@ -17,11 +17,11 @@ public class GameLogic {
         low = 0;
         high = 100;
         gn = new GenerateNumber();
-        randomNumber = gn.generate();
+        randomNumber = gn.rand();
     }
 
 
-    public void gameSart() {
+    public void gameStart() {
         System.out.println(randomNumber);
     }
 
@@ -31,11 +31,21 @@ public class GameLogic {
             return 10;
         }
         else if (number > randomNumber) {
-            high = number - 1;
+            high = number;
             return 1;
         }
         else if (number < randomNumber) {
-            low = number + 1;
+            low = number;
+            return -1;
+        }
+        return 0;
+    }
+
+    public  int checkBorders(int number) {
+        if (number >= high) {
+            return 1;
+        }
+        else if (number <= low) {
             return -1;
         }
         return 0;
