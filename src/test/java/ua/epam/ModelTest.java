@@ -45,26 +45,42 @@ public class ModelTest {
     @Test
     public void testCompareMoreThanRandom() throws Exception {
         Model model = new Model();
-        int generatedNumber = 0;
+        int generatedNumber = 100;
         int guessNumber = 51;
         while (generatedNumber > 50) {
+            model.generateRandomNumber();
             generatedNumber = model.getGeneratedNumber();
         }
         int compareResult = model.compare(guessNumber);
 
-        Assert.assertEquals(model.getHigh(), guessNumber);
+        Assert.assertEquals(1, compareResult);
     }
 
     @Test
     public void testCompareLessThanRandom() throws Exception {
         Model model = new Model();
-        int generatedNumber = 100;
+        int generatedNumber = 0;
         int guessNumber = 49;
         while (generatedNumber <= 50) {
+            model.generateRandomNumber();
             generatedNumber = model.getGeneratedNumber();
         }
         int compareResult = model.compare(guessNumber);
 
-        Assert.assertEquals(model.getHigh(), guessNumber);
+        Assert.assertEquals(-1, compareResult);
+    }
+
+    @Test
+    public void testCompareLessEqualsRandom() throws Exception {
+        Model model = new Model();
+        int generatedNumber = 100;
+        int guessNumber = 50;
+        while (generatedNumber != 50) {
+            model.generateRandomNumber();
+            generatedNumber = model.getGeneratedNumber();
+        }
+        int compareResult = model.compare(guessNumber);
+
+        Assert.assertEquals(10, compareResult);
     }
 }
