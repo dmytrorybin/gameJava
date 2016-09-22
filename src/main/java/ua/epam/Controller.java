@@ -28,51 +28,45 @@ public class Controller {
         Scanner scanner = new Scanner(System.in);
         while(true) {
             count++;
-            view.printMessage("enter number from " + model.getLow() + " to " + model.getHigh() + ":");
+            view.printMessage(Globals.NUMBER_FROM + model.getLow() + Globals.NUMBER_TO + model.getHigh());
 
             try {
                 //     number = scan.nextInt();
                 number = Integer.parseInt(scanner.nextLine());
 
-                if (checkBorders(number) == 1) {
-                    view.printMessage("You exceed higher border ");
+                if (checkBorders(number)) {
+                    view.printMessage(Globals.EXCEED_HIGHER);
                     continue;
                 }
-                else if (checkBorders(number) == -1) {
-                    view.printMessage("You exceed lower border ");
+                else if (!checkBorders(number)) {
+                    view.printMessage(Globals.EXCEED_LOWER);
                     continue;
                 }
 
-                int compareResult = model.compare(number);
-                if (compareResult == 10){
-                    view.printMessage("You won!!! Random was " + model.getGeneratedNumber() + " . Number of attempts: " + count);
+                if (model.checkNumber(number)){
+                    view.printMessage(Globals.WIN + model.getGeneratedNumber() + Globals.ATTEMPTS + count);
                     model.setStarted(false);
                     break;
                 }
                 else {
-                    if (compareResult == -1){
-                        view.printMessage("Your number is lower than random");
-                    }
-                    if (compareResult == 1){
-                        view.printMessage("Your number is higher than random");
+                    if (!model.checkNumber(number)){
+                        if(!model.compare(number))
+                            view.printMessage(Globals.NUMBER_LOWER);
+                        else if (model.compare(number))
+                            view.printMessage(Globals.NUMBER_HIGHER);
                     }
                 }
             } catch (Exception e) {
                 e.getMessage();
-                view.printMessage("Wrong input");
+                view.printMessage(Globals.WRONG_INPUT);
                 continue;
-                //   main(args);
             }
         }
     }
 
-    private int checkBorders(int number) {
-        if (number >= model.getHigh()) {
-            return 1;
-        }
-        else if (number <= model.getLow()) {
-            return -1;
-        }
-        return 0;
+    private boolean checkBorders(int number) {
+        if (number >= model.getHigh())
+            return true;
+        return false;
     }
 }

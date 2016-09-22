@@ -39,22 +39,25 @@ public class Model {
         return generatedNumber;
     }
 
-    public int compare(int number) throws InputMismatchException {
+    public boolean checkNumber(int number) throws InputMismatchException {
         if (generatedNumber == number) {
-            return 10;
+            return true;
         }
         else if (number > generatedNumber) {
             high = number;
-            return 1;
         }
         else if (number < generatedNumber) {
             low = number;
-            return -1;
         }
-        return 0;
+        return false;
     }
 
-
+    public boolean compare(int number) {
+        if (number > generatedNumber) {
+            return true;
+        }
+        return false;
+    }
 
     public int getLow() { return low; }
 

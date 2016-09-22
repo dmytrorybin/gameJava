@@ -51,9 +51,9 @@ public class ModelTest {
             model.generateRandomNumber();
             generatedNumber = model.getGeneratedNumber();
         }
-        int compareResult = model.compare(guessNumber);
+        boolean compareResult = model.checkNumber(guessNumber);
 
-        Assert.assertEquals(1, compareResult);
+        Assert.assertEquals(false, compareResult);
     }
 
     @Test
@@ -65,9 +65,9 @@ public class ModelTest {
             model.generateRandomNumber();
             generatedNumber = model.getGeneratedNumber();
         }
-        int compareResult = model.compare(guessNumber);
+        boolean compareResult = model.checkNumber(guessNumber);
 
-        Assert.assertEquals(-1, compareResult);
+        Assert.assertEquals(false, compareResult);
     }
 
     @Test
@@ -79,8 +79,8 @@ public class ModelTest {
             model.generateRandomNumber();
             generatedNumber = model.getGeneratedNumber();
         }
-        int compareResult = model.compare(guessNumber);
+        boolean compareResult = model.checkNumber(guessNumber);
 
-        Assert.assertEquals(10, compareResult);
+        Assert.assertEquals(true, compareResult);
     }
 }
