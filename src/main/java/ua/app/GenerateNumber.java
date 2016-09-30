@@ -1,4 +1,4 @@
-package ua.epam;
+package ua.app;
 
 /**
  * Created by Dmytro_Rybin on 9/13/2016.
